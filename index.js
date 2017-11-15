@@ -30,10 +30,7 @@ function initMap() {
             ),
             title: "Current Position"
         });
-        map.panTo(new google.maps.LatLng(
-            pos.coords.latitude,
-            pos.coords.longitude
-        ));
+        panTo(pos);
     }
 
     function displayAndWatch(position) {
@@ -59,6 +56,14 @@ function initMap() {
                 position.coords.latitude,
                 position.coords.longitude)
         );
+        panTo(position);
+    }
+
+    function panTo(position){
+        map.panTo(new google.maps.LatLng(
+            position.coords.latitude,
+            position.coords.longitude
+        ));
     }
 
     function initLocationProcedure() {
