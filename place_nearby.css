@@ -1,10 +1,17 @@
 * {
 	font-family: 'Roboto', sans-serif;
+	box-sizing: border-box;
+}
+
+#titulo {
+	/* position: fixed; */
+	font-size: 1.5em;
+	font-family: 'Julius Sans One', sans-serif;
 }
 
 #map {
 	height: 50%;
-	width: 50%;
+	width: 100%;
 	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 	margin: 20px auto;
@@ -13,12 +20,37 @@
 html,
 body {
 	height: 100%;
-	margin: 0;
+	margin: 5px;
 	padding: 0;
+}
+
+select {
+	border: none;
+}
+
+button {
+	margin-top: 5px;
+	padding: 5px;
+	color: white;
+	border: none;
+	background-color: indianred;
 }
 
 .b-16 {
 	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 	padding: 5px;
+}
+
+#flex {
+	margin: auto;
+	width: 300px;
+}
+
+#addType, #myRange {
+	width: 100%;
+}
+
+#types, #listaTypes {
+	width: 49%;
 }

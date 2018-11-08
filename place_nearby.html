@@ -6,113 +6,125 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="place_nearby.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
 
   <script src="place_nearby.js"></script>
 </head>
 
 <body>
-  <div id="map"></div>
+  <div id="titulo">Tipos de lugares perto de você</div>
 
-  <div class="b-12">
-    <label>Tipo</label>
-    <select name="types" id="types">
-      <option value="accounting">accounting</option>
-      <option value="airport">airport</option>
-      <option value="amusement_park">amusement_park</option>
-      <option value="aquarium">aquarium</option>
-      <option value="art_gallery">art_gallery</option>
+  <div class="b-12" id="flex">
+    <label>Tipo</label><br><br>
+    <select name="types" id="types" size="5">
+      <option value="accounting">contabilidade</option>
+      <option value="airport">aeroporto</option>
+      <option value="amusement_park">parque de diversões</option>
+      <option value="aquarium">aquário</option>
+      <option value="art_gallery">galeria de arte</option>
       <option value="atm">atm</option>
-      <option value="bakery">bakery</option>
-      <option value="bank">bank</option>
+      <option value="bakery">padaria</option>
+      <option value="bank">banco</option>
       <option value="bar">bar</option>
-      <option value="beauty_salon">beauty_salon</option>
-      <option value="bicycle_store">bicycle_store</option>
-      <option value="book_store">book_store</option>
-      <option value="bowling_alley">bowling_alley</option>
-      <option value="bus_station">bus_station</option>
-      <option value="cafe">cafe</option>
-      <option value="campground">campground</option>
-      <option value="car_dealer">car_dealer</option>
-      <option value="car_rental">car_rental</option>
-      <option value="car_repair">car_repair</option>
-      <option value="car_wash">car_wash</option>
+      <option value="beauty_salon">salão de beleza</option>
+      <option value="bicycle_store">loja de bicicletas</option>
+      <option value="book_store">loja de livro</option>
+      <option value="bowling_alley">boliche</option>
+      <option value="bus_station">estação de onibus</option>
+      <option value="cafe">café</option>
+      <option value="campground">área de camping</option>
+      <option value="car_dealer">vendedor de carros</option>
+      <option value="car_rental">aluguer de carros</option>
+      <option value="car_repair">reparo de carro</option>
+      <option value="car_wash">lavação de carro</option>
       <option value="casino">casino</option>
-      <option value="cemetery">cemetery</option>
-      <option value="church">church</option>
-      <option value="city_hall">city_hall</option>
-      <option value="clothing_store">clothing_store</option>
-      <option value="convenience_store">convenience_store</option>
-      <option value="courthouse">courthouse</option>
-      <option value="dentist">dentist</option>
-      <option value="department_store">department_store</option>
-      <option value="doctor">doctor</option>
-      <option value="electrician">electrician</option>
-      <option value="electronics_store">electronics_store</option>
-      <option value="embassy">embassy</option>
-      <option value="fire_station">fire_station</option>
-      <option value="florist">florist</option>
-      <option value="funeral_home">funeral_home</option>
-      <option value="furniture_store">furniture_store</option>
-      <option value="gas_station">gas_station</option>
-      <option value="gym">gym</option>
-      <option value="hair_care">hair_care</option>
-      <option value="hardware_store">hardware_store</option>
-      <option value="hindu_temple">hindu_temple</option>
-      <option value="home_goods_store">home_goods_store</option>
+      <option value="cemetery">cemiterio</option>
+      <option value="church">igreja</option>
+      <option value="city_hall">prefeitura</option>
+      <option value="clothing_store">loja de roupas</option>
+      <option value="convenience_store">loja de conveniencia</option>
+      <option value="courthouse">tribunal</option>
+      <option value="dentist">dentista</option>
+      <option value="department_store">loja de departamento</option>
+      <option value="doctor">doutor</option>
+      <option value="electrician">eletricista</option>
+      <option value="electronics_store">lojas eletronicas</option>
+      <option value="embassy">embaixada</option>
+      <option value="fire_station">corpo de bombeiros</option>
+      <option value="florist">florista</option>
+      <option value="funeral_home">funeraria</option>
+      <option value="furniture_store">loja de moveis</option>
+      <option value="gas_station">posto de gasolina</option>
+      <option value="gym">academia</option>
+      <option value="hair_care">cuidado capilar</option>
+      <option value="hardware_store">loja de hardware</option>
+      <option value="hindu_temple">templo hindu</option>
+      <option value="home_goods_store">loja de artigos para o lar</option>
       <option value="hospital">hospital</option>
-      <option value="insurance_agency">insurance_agency</option>
-      <option value="jewelry_store">jewelry_store</option>
-      <option value="laundry">laundry</option>
-      <option value="lawyer">lawyer</option>
-      <option value="library">library</option>
-      <option value="liquor_store">liquor_store</option>
-      <option value="local_government_office">local_government_office</option>
-      <option value="locksmith">locksmith</option>
-      <option value="lodging">lodging</option>
-      <option value="meal_delivery">meal_delivery</option>
-      <option value="meal_takeaway">meal_takeaway</option>
-      <option value="mosque">mosque</option>
-      <option value="movie_rental">movie_rental</option>
-      <option value="movie_theater">movie_theater</option>
-      <option value="moving_company">moving_company</option>
-      <option value="museum">museum</option>
-      <option value="night_club">night_club</option>
-      <option value="painter">painter</option>
+      <option value="insurance_agency">agência de seguros</option>
+      <option value="jewelry_store">joalheria</option>
+      <option value="laundry">lavanderia</option>
+      <option value="lawyer">advogado</option>
+      <option value="library">biblioteca</option>
+      <option value="liquor_store">loja de bebidas</option>
+      <option value="local_government_office">secretaria do governo local</option>
+      <option value="locksmith">chaveiro</option>
+      <option value="lodging">alojamento</option>
+      <option value="meal_delivery">entrega de refeições</option>
+      <option value="meal_takeaway">drive thru</option>
+      <option value="movie_rental">aluguel de filmes</option>
+      <option value="movie_theater">cinema</option>
+      <option value="moving_company">companhia movente</option>
+      <option value="museum">museu</option>
+      <option value="night_club">night club</option>
+      <option value="painter">pintor</option>
       <option value="park">park</option>
       <option value="parking">parking</option>
-      <option value="pet_store">pet_store</option>
-      <option value="pharmacy">pharmacy</option>
-      <option value="physiotherapist">physiotherapist</option>
-      <option value="plumber">plumber</option>
-      <option value="police">police</option>
-      <option value="post_office">post_office</option>
-      <option value="real_estate_agency">real_estate_agency</option>
-      <option value="restaurant">restaurant</option>
-      <option value="roofing_contractor">roofing_contractor</option>
-      <option value="rv_park">rv_park</option>
-      <option value="school">school</option>
-      <option value="shoe_store">shoe_store</option>
-      <option value="shopping_mall">shopping_mall</option>
+      <option value="pet_store">loja de animais</option>
+      <option value="pharmacy">farmacia</option>
+      <option value="physiotherapist">Fisioterapeuta</option>
+      <option value="plumber">encanador</option>
+      <option value="police">policia</option>
+      <option value="post_office">agencia de correios</option>
+      <option value="real_estate_agency">agencia imobiliaria</option>
+      <option value="restaurant">restaurante</option>
+      <option value="roofing_contractor">empreiteiro de coberturas</option>
+      <option value="rv_park">rv park</option>
+      <option value="school">escola</option>
+      <option value="shoe_store">loja de tenis</option>
+      <option value="shopping_mall">shopping</option>
       <option value="spa">spa</option>
-      <option value="stadium">stadium</option>
-      <option value="storage">storage</option>
-      <option value="store">store</option>
-      <option value="subway_station">subway_station</option>
-      <option value="supermarket">supermarket</option>
-      <option value="synagogue">synagogue</option>
-      <option value="taxi_stand">taxi_stand</option>
-      <option value="train_station">train_station</option>
-      <option value="transit_station">transit_station</option>
-      <option value="travel_agency">travel_agency</option>
-      <option value="veterinary_care">veterinary_care</option>
+      <option value="stadium">estadio</option>
+      <option value="storage">armazenam</option>
+      <option value="store">loja</option>
+      <option value="subway_station">estação de metrô</option>
+      <option value="supermarket">super mercado</option>
+      <option value="synagogue">sinagoga</option>
+      <option value="taxi_stand">ponto de taxi</option>
+      <option value="train_station">estação de trem</option>
+      <option value="transit_station">estação de transito</option>
+      <option value="travel_agency">agencia de viagem</option>
+      <option value="veterinary_care">veterinario</option>
       <option value="zoo">zoo</option>
     </select>
-    <button id="addType">adicionar no filtro</button>
 
-    <div id="listaTypes">
+    <select id="listaTypes" size="5">
+    </select>
 
-    </div>
+    <br>
+
+    <button id="addType">adicionar/remover</button>
+
+    <br>
+
+    <input type="range" min="1" value="1000" max="1000000" id="myRange">
+    <center>
+      <span id="valueRange">1000 metros</span>
+    </center>
+
   </div>
+
+  <div id="map"></div>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARUAyY2s-UFWXLCQj-wsGeb0_Ogv4jKBE&libraries=places&callback=initMap" async defer></script>
 </body>
