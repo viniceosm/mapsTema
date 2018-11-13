@@ -2,7 +2,7 @@ var map;
 var infowindow;
 var service;
 var latAndLng = { lat: -26.504767, lng: -49.0887484 };
-var currentLocal;
+var currentLocal, currentPositionMarker;
 var typesSearch = new Set();
 var typesTextSearch = new Set();
 var radiusNearby = 1000;
@@ -10,7 +10,25 @@ var markersPlaceNearby = [];
 
 var opTypes = getOpTypes();
 
+var keyAPI = `AIzaSyARUAyY2s-UFWXLCQj-wsGeb0_Ogv4jKBE`;
+var urlGeocode = `https://maps.googleapis.com/maps/api/geocode/json?key=${keyAPI}&address=`;
+
 window.onload = function () {
+	document.getElementById('pac-input').addEventListener('keyup', function(evt) {
+		if (evt.keyCode == '13') {
+			fetch(urlGeocode + 'Cat%C3%B3lica%20de%20Santa%20Catarina%20-%20Rua%20dos%20Imigrantes%20-%20Rau,%20Jaragu%C3%A1%20do%20Sul%20-%20SC,%20Brasil')
+				.then(function (response) {
+					response.json().then(function (data) {
+						if (data.results.length >= 1) {
+							currentLocal = data.results[0].geometry.location;
+
+							setCurrentPosition(currentLocal);
+						}
+					});
+				})
+		}
+	});
+
 	document.getElementById('addType').onclick = function () {
 		adicionaTipo();
 	}
@@ -62,18 +80,26 @@ window.onload = function () {
 }
 
 function initMap() {
-	var senaiAe = latAndLng;
-	currentLocal = senaiAe;
+	currentLocal = latAndLng;
 
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: currentLocal,
 		zoom: 15
 	});
 
+	document.getElementById('map').classList.add("hidden");
+
 	infowindow = new google.maps.InfoWindow();
 	service = new google.maps.places.PlacesService(map);
 
+	initAutocomplete();
 	pesquisaLugaresPertos();
+}
+
+function initAutocomplete () {
+	var input = document.getElementById('pac-input');
+	var autocomplete = new google.maps.places.Autocomplete(input);
+	// autocomplete.bindTo('bounds', map);
 }
 
 async function pesquisaLugaresPertos() {
@@ -116,6 +142,22 @@ function createMarkerPlaceNearby(place) {
 		infowindow.setContent(place.name);
 		infowindow.open(map, this);
 	});
+}
+
+// current position of the user
+function setCurrentPosition(pos) {
+	currentPositionMarker = new google.maps.Marker({
+		map: map,
+		position: new google.maps.LatLng(pos.lat, pos.lng),
+		title: "Current Position"
+		// , icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png'
+	});
+	console.log(pos);
+	panTo(pos);
+}
+
+function panTo(pos) {
+	map.panTo(new google.maps.LatLng(pos.lat, pos.lng));
 }
 
 function getOpTypes () {
