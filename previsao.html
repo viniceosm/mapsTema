@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<script type="text/javascript">
+//cf95dc9b
+	$.ajax({
+	    type: "GET",
+	    url: "https://api.hgbrasil.com/weather/?format=json&woeid=455903",
+	    dataType: 'json',
+	    success: function(data) {
+	       console.log(data);
+            $(".prin").append("<p> Cidade: "+data.results.city_name+"</p>");
+            $(".prin").append("<p> Dia atual: "+data.results.date+"</p>");
+            $(".prin").append("<p> Condição: "+data.results.description+"</p>");
+            $(".prin").append("<p> Velocidade do vento: "+data.results.wind_speedy+"</p>");
+
+
+            var semana = data.results.forecast;
+
+            $.each(semana, function(i) {
+                $(".sem").append("<p> Dia: "+semana[i].date+"("+semana[i].weekday+") Descrição: "+semana[i].description+" Temp Máxima: "+semana[i].max+" Temp Minima: "+semana[i].min+"</p>");
+            });
+        }
+	});
+
+	$.ajax({
+	    type: "GET",
+	    url: "https://api.hgbrasil.com/weather/?format=json&city_name=Florianopolis&key=cf95dc9b",
+	    dataType: 'json',
+	    success: function(data) {
+	       console.log(data);
+            $(".cid").append("<p> Cidade: "+data.results.city_name+"</p>");
+            $(".cid").append("<p> Dia atual: "+data.results.date+"</p>");
+            $(".cid").append("<p> Condição: "+data.results.description+"</p>");
+            $(".cid").append("<p> Velocidade do vento: "+data.results.wind_speedy+"</p>");
+
+			var semanaCid = data.results.forecast;
+
+			$.each(semanaCid, function(i) {
+				$(".semCid").append("<p> Dia: "+semanaCid[i].date+"("+semanaCid[i].weekday+") Descrição: "+semanaCid[i].description+" Temp Máxima: "+semanaCid[i].max+" Temp Minima: "+semanaCid[i].min+"</p>");
+			});
+	    }
+	});
+
+    $.ajax({
+	    type: "GET",
+	    url: "https://api.hgbrasil.com/weather/?format=json&woeid=455903&array_limit=2&fields=only_results,temp,city_name,forecast,max,min,date&key=cf95dc9b",
+	    dataType: 'json',
+	    success: function(data) {
+	       console.log(data);
+			$(".terc").append("<p> Cidade: "+data.city_name+"</p>");
+            $(".terc").append("<p> Dia atual: "+data.date+"</p>");
+			$(".terc").append("<p> Temperatura: "+data.temp+"</p>");
+
+			var semanaCid = data.forecast;
+
+			$.each(semanaCid, function(i) {
+				$(".terc").append("<p> Dia: "+semanaCid[i].date+" Temp Máxima: "+semanaCid[i].max+" Temp Minima: "+semanaCid[i].min+"</p>");
+			});
+	    }
+	});
+
+    function procurar(){
+		var la = $("#nomeCidade").val();
+		console.log(la);
+        $.ajax({
+            type: "GET",
+            url: "https://api.hgbrasil.com/weather/?format=json&city_name="+la+"&key=cf95dc9b",
+            dataType: 'json',
+            success: function(data) {
+               console.log(data);
+                $(".cid" ).empty();
+				$(".semCid" ).empty();
+                $(".cid").append("<p> Cidade: "+data.results.city_name+"</p>");
+                $(".cid").append("<p> Dia atual: "+data.results.date+"</p>");
+                $(".cid").append("<p> Condição: "+data.results.description+"</p>");
+                $(".cid").append("<p> Velocidade do vento: "+data.results.wind_speedy+"</p>");
+
+				var semanaCid = data.results.forecast;
+
+				$.each(semanaCid, function(i) {
+					$(".semCid").append("<p> Dia: "+semanaCid[i].date+"("+semanaCid[i].weekday+") Descrição: "+semanaCid[i].description+" Temp Máxima: "+semanaCid[i].max+" Temp Minima: "+semanaCid[i].min+"</p>");
+				});
+            }
+        });
+    }
+</script>
+
+<style>
+body {
+	background: #a4a4f9;
+	padding: 40px;
+}
+* {
+	font-family: 'Roboto', sans-serif;
+}
+.b {
+	margin: 10px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+
+	-webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+
+	background: white;
+
+	word-wrap: break-word;
+}
+.b-t {
+	text-align: center;
+	padding: 5px;
+}
+.b-c 	{
+	padding: 10px 40px;
+}
+button {
+    align-items: center;
+    border: none;
+    display: inline-flex;
+    justify-content: center;
+    outline: none;
+    position: relative;
+    z-index: 0;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Google Sans',Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    font-size: .875rem;
+    letter-spacing: .25px;
+    background: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #5f6368;
+    cursor: pointer;
+    font-weight: 500;
+    height: 36px;
+    outline: none;
+    padding: 0 16px;
+    box-shadow: inset 0 0 0 1px #dadce0;
+    min-width: 104px;
+    padding-left: 12px;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
+    margin-right: 12px;
+    text-decoration: none;
+}
+</style>
+
+<body>
+	<div class="b">
+		<div class="b-t">
+			<p>https://api.hgbrasil.com/weather/?format=json&woeid=455903</p>
+		</div>
+
+		<div class="b-c">
+			<div class="prin">
+			</div>
+			<div class="sem">
+				<p>Dias da semana</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="b">
+		<div class="b-t">
+			<p>https://api.hgbrasil.com/weather/?format=json&city_name={NOME DA CIDADE}&key=cf95dc9b</p>
+		</div>
+
+		<div class="b-c">
+			<input id="nomeCidade" type="text"></input>
+			<button onclick="procurar()">PROCURAR Cidade</button>
+			<div>
+				<div class="cid">
+					<p>Procurando por cidade</p>
+				</div>
+				<div class="semCid">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="b">
+		<div class="b-t">
+			<p>https://api.hgbrasil.com/weather/?format=json&woeid=455903&array_limit=2&fields=only_results,temp,city_name,forecast,max,min,date&key=cf95dc9b</p>
+		</div>
+		<div class="b-c">
+			<div class="terc">
+			</div>
+		</div>
+	</div>
+</body>
+</html>
