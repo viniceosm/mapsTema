@@ -118,35 +118,103 @@ body {
 .b-c 	{
 	padding: 10px 40px;
 }
+.input {
+	background-color: rgb(241, 243, 244);
+	border-bottom-color: rgb(32, 33, 36);
+	border-bottom-color: rgb(32, 33, 36);
+	border-bottom-style: none;
+	border-bottom-width: 0px;
+	border-image-outset: 0px;
+	border-image-repeat: stretch;
+	border-image-slice: 100%;
+	border-image-source: none;
+	border-image-width: 1;
+	border-left-color: rgb(32, 33, 36);
+	border-left-style: none;
+	border-left-width: 0px;
+	border-right-color: rgb(32, 33, 36);
+	border-right-style: none;
+	border-right-width: 0px;
+	border-top-color: rgb(32, 33, 36);
+	border-top-style: none;
+	border-top-width: 0px;
+
+	caret-color: rgb(26, 115, 232);
+	color: rgb(32, 33, 36);
+	font-family: Roboto, "DejaVu Sans", Arial, sans-serif;
+	font-size: 13px;
+	height: 32px;
+	line-height: 20.02px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	outline-color: rgb(32, 33, 36);
+	outline-style: none;
+	outline-width: 0px;
+	padding-bottom: 6px;
+	padding-inline-end: 8px;
+	padding-inline-start: 8px;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 6px;
+	text-align: start;
+	text-overflow: ellipsis;
+	width: 264px;
+	-webkit-appearance: none;
+	-webkit-rtl-ordering: logical;
+}
 button {
-    align-items: center;
-    border: none;
-    display: inline-flex;
-    justify-content: center;
-    outline: none;
-    position: relative;
-    z-index: 0;
-    -webkit-font-smoothing: antialiased;
-    font-family: 'Google Sans',Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
-    font-size: .875rem;
-    letter-spacing: .25px;
-    background: none;
-    border-radius: 4px;
-    box-sizing: border-box;
-    color: #5f6368;
-    cursor: pointer;
-    font-weight: 500;
-    height: 36px;
-    outline: none;
-    padding: 0 16px;
-    box-shadow: inset 0 0 0 1px #dadce0;
-    min-width: 104px;
-    padding-left: 12px;
-    -webkit-user-drag: none;
-    -webkit-user-select: none;
-    user-select: none;
-    margin-right: 12px;
-    text-decoration: none;
+	background: transparent;
+
+	border-bottom-color: rgb(218, 220, 224);
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-image-outset: 0px;
+	border-image-repeat: stretch;
+	border-image-slice: 100%;
+	border-image-source: none;
+	border-image-width: 1;
+	border-left-color: rgb(218, 220, 224);
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-color: rgb(218, 220, 224);
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-color: rgb(218, 220, 224);
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border-top-style: solid;
+	border-top-width: 1px;
+	color: rgb(26, 115, 232);
+	direction: ltr;
+	flex-shrink: 0;
+	font-family: Roboto, Noto, sans-serif;
+	font-size: 13px;
+	font-weight: 500;
+	height: 32px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 12px;
+	padding-bottom: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8px;
+	text-decoration-color: rgb(26, 115, 232);
+	text-decoration-line: none;
+	text-decoration-style: solid;
+	text-transform: none;
+	transition-delay: 0s;
+	transition-duration: 0s;
+	transition-property: none;
+	transition-timing-function: ease;
+}
+button:hover {
+	background-color:rgba(66, 133, 244, 0.04);
+	border-color: rgb(210, 227, 252);
 }
 </style>
 
@@ -171,7 +239,7 @@ button {
 		</div>
 
 		<div class="b-c">
-			<input id="nomeCidade" type="text"></input>
+			<input id="nomeCidade" class="input" type="text"></input>
 			<button onclick="procurar()">PROCURAR Cidade</button>
 			<div>
 				<div class="cid">
