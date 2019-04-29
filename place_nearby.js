@@ -1,12 +1,16 @@
 var map;
 var infowindow;
 var service;
-var latAndLng = { lat: -26.504767, lng: -49.0887484 };
-var currentLocal, currentPositionMarker;
-var typesSearch = new Set();
-var typesTextSearch = new Set();
-var radiusNearby = 1000;
-var markersPlaceNearby = [];
+var latAndLngInit = { lat: -26.504767, lng: -49.0887484 };
+var typesToSearch = {
+	value: new Set(),
+	text: new Set()
+};
+var currentLocal;
+var radiusNearbyToSearch = 1000;
+var markers = {
+	placeNearby: []
+};
 
 var opTypes = getOpTypes();
 
@@ -14,21 +18,6 @@ var keyAPI = `AIzaSyARUAyY2s-UFWXLCQj-wsGeb0_Ogv4jKBE`;
 var urlGeocode = `https://maps.googleapis.com/maps/api/geocode/json?key=${keyAPI}&address=`;
 
 window.onload = function () {
-	document.getElementById('pac-input').addEventListener('keyup', function(evt) {
-		if (evt.keyCode == '13') {
-			fetch(urlGeocode + 'Cat%C3%B3lica%20de%20Santa%20Catarina%20-%20Rua%20dos%20Imigrantes%20-%20Rau,%20Jaragu%C3%A1%20do%20Sul%20-%20SC,%20Brasil')
-				.then(function (response) {
-					response.json().then(function (data) {
-						if (data.results.length >= 1) {
-							currentLocal = data.results[0].geometry.location;
-
-							setCurrentPosition(currentLocal);
-						}
-					});
-				})
-		}
-	});
-
 	document.getElementById('addType').onclick = function () {
 		adicionaTipo();
 	}
@@ -50,7 +39,7 @@ window.onload = function () {
 
 	document.getElementById('myRange').oninput = function () {
 		var m = document.getElementById('myRange').value;
-		document.getElementById('valueRange').innerHTML = m + ' ' + (m == 1 ? 'metro' : 'metros');
+		document.getElementById('valueRange').innerHTML = `${m} ${(m == 1 ? 'metro' : 'metros')}`;
 		// pesquisaLugaresPertos()
 	}
 
@@ -58,21 +47,21 @@ window.onload = function () {
 		type = document.getElementById('types').value;
 		text = document.getElementById('types').options[document.getElementById('types').selectedIndex].innerText;
 
-		if (!typesSearch.has(type)) {
-			typesSearch.add(type);
-			typesTextSearch.add(text);
+		if (!typesToSearch.value.has(type)) {
+			typesToSearch.value.add(type);
+			typesToSearch.text.add(text);
 		} else {
-			typesSearch.delete(type);
-			typesTextSearch.delete(text);
+			typesToSearch.value.delete(type);
+			typesToSearch.text.delete(text);
 		}
 
 		document.getElementById('listaTypes').innerHTML = '';
-		for (t of typesTextSearch) {
-			document.getElementById('listaTypes').innerHTML += '<option>' + t + '</option>';
+		for (t of typesToSearch.text) {
+			document.getElementById('listaTypes').innerHTML += `<option>${t}</option>`;
 		}
 
-		for (i in markersPlaceNearby) {
-			markersPlaceNearby[i].setMap(null);
+		for (i in markers.placeNearby) {
+			markers.placeNearby[i].setMap(null);
 		}
 
 		pesquisaLugaresPertos();
@@ -80,36 +69,27 @@ window.onload = function () {
 }
 
 function initMap() {
-	currentLocal = latAndLng;
+	currentLocal = latAndLngInit;
 
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: currentLocal,
 		zoom: 15
 	});
 
-	document.getElementById('map').classList.add("hidden");
-
 	infowindow = new google.maps.InfoWindow();
 	service = new google.maps.places.PlacesService(map);
 
-	initAutocomplete();
 	pesquisaLugaresPertos();
 }
 
-function initAutocomplete () {
-	var input = document.getElementById('pac-input');
-	var autocomplete = new google.maps.places.Autocomplete(input);
-	// autocomplete.bindTo('bounds', map);
-}
-
 async function pesquisaLugaresPertos() {
-	if (typesTextSearch.size > 0) {
-		radiusNearby = document.getElementById('myRange').value;
+	if (typesToSearch.text.size > 0) {
+		radiusNearbyToSearch = document.getElementById('myRange').value;
 
-		for (type of typesSearch) {
+		for (type of typesToSearch.value) {
 			let [results, status] = await promiseNearbySearch({
 				location: currentLocal,
-				radius: radiusNearby,
+				radius: radiusNearbyToSearch,
 				type: [type]
 			});
 
@@ -124,7 +104,7 @@ async function pesquisaLugaresPertos() {
 
 function promiseNearbySearch (obj) {
 	return new Promise((resolve, reject) => {
-		service.nearbySearch(obj, function (results, status) {
+		service.nearbySearch(obj, (results, status) => {
 			resolve([results, status]);
 		});
 	})
@@ -136,28 +116,12 @@ function createMarkerPlaceNearby(place) {
 		position: place.geometry.location
 	});
 
-	markersPlaceNearby.push(markerPlaceNearby);
+	markers.placeNearby.push(markerPlaceNearby);
 
 	google.maps.event.addListener(markerPlaceNearby, 'mouseover', function () {
 		infowindow.setContent(place.name);
 		infowindow.open(map, this);
 	});
-}
-
-// current position of the user
-function setCurrentPosition(pos) {
-	currentPositionMarker = new google.maps.Marker({
-		map: map,
-		position: new google.maps.LatLng(pos.lat, pos.lng),
-		title: "Current Position"
-		// , icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png'
-	});
-	console.log(pos);
-	panTo(pos);
-}
-
-function panTo(pos) {
-	map.panTo(new google.maps.LatLng(pos.lat, pos.lng));
 }
 
 function getOpTypes () {
