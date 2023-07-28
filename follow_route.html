@@ -3,6 +3,7 @@
 <head>
     <title>Rota com várias paradas no Google Maps</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARUAyY2s-UFWXLCQj-wsGeb0_Ogv4jKBE&callback=initMap" async defer></script>
+    <script src="https://cdn.rawgit.com/googlemaps/js-map-label/gh-pages/src/maplabel-compiled.js"></script>
     <script>
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
@@ -36,6 +37,20 @@
             directionsService.route(request, function (result, status) {
                 if (status == 'OK') {
                     directionsRenderer.setDirections(result);
+
+                    // Exibir horário da partida acima do marcador da origem
+                    var originMarker = new google.maps.Marker({
+                        position: result.routes[0].legs[0].start_location,
+                        map: map
+                    });
+
+                    var originLabel = new MapLabel({
+                        text: 'Horário de Partida: ' + dataHoraPartida.toLocaleString('pt-BR'),
+                        position: result.routes[0].legs[0].start_location,
+                        map: map,
+                        fontSize: 14,
+                        align: 'center'
+                    });
                 }
             });
         }
