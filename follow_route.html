@@ -3,11 +3,10 @@
 <head>
     <title>Rota com várias paradas no Google Maps</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARUAyY2s-UFWXLCQj-wsGeb0_Ogv4jKBE&callback=initMap" async defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-info-bubble@1.1.0/dist/infobox.min.js"></script>
     <script>
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 10,
+                zoom: 2,
                 center: { lat: -20.3167, lng: -40.3333 } // Defina o centro do mapa para uma localização inicial (Vitória, ES)
             });
 
@@ -37,31 +36,6 @@
             directionsService.route(request, function (result, status) {
                 if (status == 'OK') {
                     directionsRenderer.setDirections(result);
-
-                    // Exibir horário da partida em uma janela de informação personalizada para o marcador da origem
-                    var originMarker = new google.maps.Marker({
-                        position: result.routes[0].legs[0].start_location,
-                        map: map
-                    });
-
-                    var originInfoBox = new InfoBox({
-                        content: 'Origem: Rodoviária de Vitória, ES<br>Horário de Partida: ' + dataHoraPartida.toLocaleString('pt-BR')
-                    });
-
-                    originInfoBox.open(map, originMarker);
-
-                    /*// Exibir horário previsto nas paradas no tooltip
-                    var legs = result.routes[0].legs;
-                    for (var i = 0; i < legs.length; i++) {
-                        var stop = legs[i].end_location;
-                        var stopTime = new Date(dataHoraPartida.getTime() + legs[i].duration.value * 1000);
-
-                        var stopMarker = new google.maps.Marker({
-                            position: stop,
-                            map: map,
-                            title: 'Parada: ' + waypoints[i].location + '\nHorário Previsto: ' + stopTime.toLocaleString('pt-BR')
-                        });
-                    }*/
                 }
             });
         }
