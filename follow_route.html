@@ -37,14 +37,16 @@
                 if (status == 'OK') {
                     directionsRenderer.setDirections(result);
 
-                    // Exibir horário da partida acima do marcador da origem
-                    var originMarker = new MarkerWithLabel({
-                        position: result.routes[0].legs[0].start_location,
-                        map: map,
-                        labelContent: 'Horário de Partida: ' + dataHoraPartida.toLocaleString('pt-BR'),
-                        labelClass: 'label-marker',
-                        labelAnchor: new google.maps.Point(50, -20)
+                    // Ajustar o zoom e o centro do mapa para exibir toda a rota
+                    var bounds = new google.maps.LatLngBounds();
+                    result.routes[0].legs.forEach(function (leg) {
+                        leg.steps.forEach(function (step) {
+                            step.path.forEach(function (latLng) {
+                                bounds.extend(latLng);
+                            });
+                        });
                     });
+                    map.fitBounds(bounds);
                 }
             });
         }
