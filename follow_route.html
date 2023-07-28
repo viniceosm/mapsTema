@@ -37,11 +37,18 @@
                 if (status == 'OK') {
                     directionsRenderer.setDirections(result);
 
-                    // Exibir horário da partida no tooltip da origem
+                    // Exibir horário da partida em uma janela de informação personalizada para o marcador da origem
                     var originMarker = new google.maps.Marker({
                         position: result.routes[0].legs[0].start_location,
-                        map: map,
-                        title: 'Origem: Rodoviária de Vitória, ES\nHorário de Partida: ' + dataHoraPartida.toLocaleString('pt-BR')
+                        map: map
+                    });
+
+                    var originInfoWindow = new google.maps.InfoWindow({
+                        content: 'Origem: Rodoviária de Vitória, ES<br>Horário de Partida: ' + dataHoraPartida.toLocaleString('pt-BR')
+                    });
+
+                    originMarker.addListener('click', function() {
+                        originInfoWindow.open(map, originMarker);
                     });
 
                     /*// Exibir horário previsto nas paradas no tooltip
