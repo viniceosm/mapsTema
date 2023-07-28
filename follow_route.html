@@ -3,6 +3,7 @@
 <head>
     <title>Rota com várias paradas no Google Maps</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARUAyY2s-UFWXLCQj-wsGeb0_Ogv4jKBE&callback=initMap" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-info-bubble@1.1.0/dist/infobox.min.js"></script>
     <script>
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
@@ -43,13 +44,11 @@
                         map: map
                     });
 
-                    var originInfoWindow = new google.maps.InfoWindow({
+                    var originInfoBox = new InfoBox({
                         content: 'Origem: Rodoviária de Vitória, ES<br>Horário de Partida: ' + dataHoraPartida.toLocaleString('pt-BR')
                     });
 
-                    originMarker.addListener('click', function() {
-                        originInfoWindow.open(map, originMarker);
-                    });
+                    originInfoBox.open(map, originMarker);
 
                     /*// Exibir horário previsto nas paradas no tooltip
                     var legs = result.routes[0].legs;
